@@ -17,10 +17,10 @@ public class Geometry {
     }
 
     static void printSquareArea(double side) {
-        System.out.println("Площадь квадрата со стороной " + side + " = " + getADouble(side));
+        System.out.println("Площадь квадрата со стороной " + side + " = " + squareArea(side));
     }
 
-    private static double getADouble(double a) {
+    private static double squareArea(double a) {
         return a * a;
     }
 }
