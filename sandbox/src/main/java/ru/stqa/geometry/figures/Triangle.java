@@ -2,6 +2,8 @@ package ru.stqa.geometry.figures;
 
 public class Triangle {
 
+
+
     public static void printTriangleArea(double a, double b, double c) {
         String text = String.format("Площадь Треугольника со сторонами %f, %f  и %f = %f", a, b, c, area(a, b, c));
         System.out.println(text);
