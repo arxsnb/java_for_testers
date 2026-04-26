@@ -2,6 +2,7 @@ package ru.stqa.geometry.figures;
 
 public record Rectangle(double a, double b) {
 
+//    public class Rectangle {
 //    private double a;
 //    private  double b;
 //
