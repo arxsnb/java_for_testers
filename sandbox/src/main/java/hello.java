@@ -30,7 +30,7 @@ public class hello {
 
     private static int calculete() {
         var x = 1;
-        var y = 1;
+        var y = 0;
         var z = divide(x, y);
         return z;
     }
