@@ -36,7 +36,7 @@ public record Rectangle(double a, double b) {
 
         Rectangle rectangle = (Rectangle) o;
         return (Double.compare(rectangle.a, this.a) == 0 && Double.compare(rectangle.b, this.b) == 0)
-                || (Double.compare(rectangle.a, this.b) == 0 && Double.compare(rectangle.b, this.a) == 0)                ;
+                || (Double.compare(rectangle.a, this.b) == 0 && Double.compare(rectangle.b, this.a) == 0);
     }
 
 //    @Override
@@ -46,8 +46,13 @@ public record Rectangle(double a, double b) {
 //        return result;
 //    }
 
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(a, b);
+//    }
+
     @Override
     public int hashCode() {
-        return Objects.hash(a, b);
+        return 1;
     }
 }
