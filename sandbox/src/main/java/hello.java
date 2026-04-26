@@ -2,15 +2,17 @@ import java.io.File;
 
 public class hello {
     public static void main(String[] args) {
-        try {
-            var z = calculete();
+
+        var x = 1;
+        var y = 1;
+        if (y == 0) {
+            System.out.println("Деление на ноль запрещено");
+        } else {
+            var z = divide(x, y);
             System.out.println(z);
             System.out.println("Hello, world!");
-        } catch (ArithmeticException exception) {
-            //System.out.println(exception.getMessage());
-            exception.printStackTrace();
-
         }
+
 
 
         System.out.println(2 + 2);
@@ -26,13 +28,6 @@ public class hello {
         var configFile = new File("sandbox/build.gradle");
         System.out.println(configFile.getAbsoluteFile());
         System.out.println(configFile.exists());
-    }
-
-    private static int calculete() {
-        var x = 1;
-        var y = 0;
-        var z = divide(x, y);
-        return z;
     }
 
     private static int divide(int x, int y) {
