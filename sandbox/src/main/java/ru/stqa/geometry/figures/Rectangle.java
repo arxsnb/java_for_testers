@@ -1,7 +1,6 @@
 package ru.stqa.geometry.figures;
 
 
-import java.util.Objects;
 
 public record Rectangle(double a, double b) {
 
