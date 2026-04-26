@@ -38,4 +38,71 @@ public class TriangleTests {
         double result = s.perimeter();
         Assertions.assertEquals(12.00, result);
     }
+
+
+    //Тесты на положительность сторон
+
+    @Test // a < 0
+    void cannotCreateTriangleWithNegativeSideA() {
+        try {
+            new  Triangle (-5.0, 3.0, 4.0);
+            Assertions.fail();
+        } catch (IllegalArgumentException exception) {
+            // ok
+        }
+    }
+
+    @Test // b < 0
+    void cannotCreateTriangleWithNegativeSideB() {
+        try {
+            new  Triangle (5.0, -3.0, 4.0);
+            Assertions.fail();
+        } catch (IllegalArgumentException exception) {
+            // ok
+        }
+    }
+
+    @Test // c < 0
+    void cannotCreateTriangleWithNegativeSideC() {
+        try {
+            new  Triangle (5.0, 3.0, -4.0);
+            Assertions.fail();
+        } catch (IllegalArgumentException exception) {
+            // ok
+        }
+    }
+
+
+    //Тесты на существование треугольника
+
+    @Test // a = b + c
+    void cannotCreateTriangleWithSideA() {
+        try {
+            new  Triangle (7.0, 3.0, 4.0);
+            Assertions.fail();
+        } catch (IllegalArgumentException exception) {
+            // ok
+        }
+    }
+
+    @Test // B > a + c
+    void cannotCreateTriangleWithSideB() {
+        try {
+            new  Triangle (4.0, 8.0, 3.0);
+            Assertions.fail();
+        } catch (IllegalArgumentException exception) {
+            // ok
+        }
+    }
+
+    @Test // C > b + c
+    void cannotCreateTriangleWithSideC() {
+        try {
+            new  Triangle (4.0, 3.0, 8.0);
+            Assertions.fail();
+        } catch (IllegalArgumentException exception) {
+            // ok
+        }
+    }
+
 }
