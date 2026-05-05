@@ -20,13 +20,13 @@ public class GroupRemovalTest extends TestBase {
     @Test
     public void CanRemoveGroup() {
 
-        app.openGroupsPage();
+        app.groups().openGroupsPage();
 
-        if (!app.isGroupPresent()){
-            app.createGroup(new GroupData("GR name", "GR header", "GR footer"));
+        if (!app.groups().isGroupPresent()){
+            app.groups().createGroup(new GroupData("GR name", "GR header", "GR footer"));
         }
 
-        app.removeGroup();
+        app.groups().removeGroup();
     }
 
 }
