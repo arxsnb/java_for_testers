@@ -1,4 +1,4 @@
 package model;
 
-public record GroupData(String group_name, String group_header, String group_footer) {
+public record GroupData(String name, String header, String footer) {
 }
