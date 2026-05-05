@@ -1,4 +1,3 @@
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
@@ -7,7 +6,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class GroupCreationTestTest {
+public class GroupCreationTest {
     private static WebDriver driver;
 
 
@@ -40,7 +39,7 @@ public class GroupCreationTestTest {
 
     @Test
     public void CanCreateGroup() {
-        if (! isElementPresent(By.name("new"))) {
+        if (!isElementPresent(By.name("new"))) {
             // Переход в группы
             driver.findElement(By.linkText("groups")).click();
         }

@@ -6,7 +6,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class GroupDeleteTestTestTest {
+public class GroupRemovalTest {
     private WebDriver driver;
 
     @BeforeEach
@@ -48,7 +48,7 @@ public class GroupDeleteTestTestTest {
     @Test
     public void CanRemoveGroup() {
 
-        if (! isElementPresent(By.name("new"))) {
+        if (!isElementPresent(By.name("new"))) {
             // Переход в группы
             driver.findElement(By.linkText("groups")).click();
         }
