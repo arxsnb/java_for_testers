@@ -1,5 +1,5 @@
+import model.GroupData;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
 
 public class GroupRemovalTest extends TestBase {
 
@@ -21,7 +21,7 @@ public class GroupRemovalTest extends TestBase {
         openGroupsPage();
 
         if (!isGroupPresent()){
-            createGroup("GR name", "GR header", "GR footer");
+            createGroup(new GroupData("GR name", "GR header", "GR footer"));
         }
 
         removeGroup();

@@ -1,3 +1,4 @@
+import model.GroupData;
 import org.junit.jupiter.api.Test;
 
 public class GroupCreationTest extends TestBase {
@@ -15,7 +16,7 @@ public class GroupCreationTest extends TestBase {
     @Test
     public void CanCreateGroup() {
         openGroupsPage();
-        createGroup("GR name", "GR header", "GR footer");
+        createGroup(new GroupData("GR name", "GR header", "GR footer"));
 
     }
 
@@ -23,7 +24,7 @@ public class GroupCreationTest extends TestBase {
     @Test
     public void CanCreateGroupWithEmptyName() {
         openGroupsPage();
-        createGroup("", "", "");
+        createGroup(new GroupData("", "", ""));
 
     }
 }
