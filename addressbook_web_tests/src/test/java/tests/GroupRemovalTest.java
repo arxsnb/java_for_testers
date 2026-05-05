@@ -1,3 +1,5 @@
+package tests;
+
 import model.GroupData;
 import org.junit.jupiter.api.Test;
 
@@ -18,13 +20,13 @@ public class GroupRemovalTest extends TestBase {
     @Test
     public void CanRemoveGroup() {
 
-        openGroupsPage();
+        app.openGroupsPage();
 
-        if (!isGroupPresent()){
-            createGroup(new GroupData("GR name", "GR header", "GR footer"));
+        if (!app.isGroupPresent()){
+            app.createGroup(new GroupData("GR name", "GR header", "GR footer"));
         }
 
-        removeGroup();
+        app.removeGroup();
 
         //Выход
         //driver.findElement(By.linkText("Logout")).click();
