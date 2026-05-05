@@ -17,14 +17,21 @@ public class GroupCreationTest extends TestBase {
     public void CanCreateGroup() {
         openGroupsPage();
         createGroup(new GroupData("GR name", "GR header", "GR footer"));
-
     }
 
 
     @Test
     public void CanCreateGroupWithEmptyName() {
         openGroupsPage();
-        createGroup(new GroupData("", "", ""));
+        createGroup(new GroupData());
+    }
 
+
+    @Test
+    public void CanCreateGroupWithNameOnly() {
+        openGroupsPage();
+        var emptyGroup = new GroupData();
+        var groupWithName = emptyGroup.withName("some name");
+        createGroup(groupWithName);
     }
 }
