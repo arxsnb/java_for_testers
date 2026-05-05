@@ -27,7 +27,7 @@ public class TestBase {
             driver.manage().window().setSize(new Dimension(995, 811));
             driver.findElement(By.name("pass")).sendKeys("secret");
             driver.findElement(By.name("user")).sendKeys("admin");
-            driver.findElement(By.xpath("//input[@value=\'Login\']")).click();
+            driver.findElement(By.xpath("//input[@value='Login']")).click();
         }
 
     }
