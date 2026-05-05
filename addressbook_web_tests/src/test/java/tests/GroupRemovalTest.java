@@ -27,9 +27,6 @@ public class GroupRemovalTest extends TestBase {
         }
 
         app.removeGroup();
-
-        //Выход
-        //driver.findElement(By.linkText("Logout")).click();
     }
 
 }
