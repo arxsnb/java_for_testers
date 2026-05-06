@@ -10,7 +10,8 @@ public class ContactCreationTest extends TestBase {
     public void CanCreateContact() {
         app.contacts().createContact(new ContactData(
                 "First name Test " + System.currentTimeMillis() % 10000, "Middle name Test",
-                "Last name Test", "Nickname Test"
+                "Last name Test", "Nickname Test", "Title name Test",
+                "Company Test", "Address Test"
         ));
     }
 
