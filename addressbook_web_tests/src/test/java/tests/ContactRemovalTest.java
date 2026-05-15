@@ -2,6 +2,7 @@ package tests;
 
 import model.ContactData;
 import model.GroupData;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class ContactRemovalTest extends TestBase {
@@ -14,8 +15,10 @@ public class ContactRemovalTest extends TestBase {
                     "First name Test " + System.currentTimeMillis() % 10000, "Middle name Test",
                     "Last name Test"));
         }
-
+        int contactCount = app.contacts().getCount();
         app.contacts().removeContact();
+        int newContactCount = app.contacts().getCount();
+        Assertions.assertEquals(contactCount - 1, newContactCount);
     }
 
 }

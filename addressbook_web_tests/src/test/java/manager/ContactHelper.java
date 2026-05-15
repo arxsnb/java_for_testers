@@ -74,4 +74,10 @@ public class ContactHelper extends HelperBase {
     private void removeSelectedContact() {
         click(By.name("delete"));
     }
+
+    public int getCount() {
+        openHomePage();
+        return manager.driver.findElements(By.name("selected[]")).size();
+    }
+
 }
