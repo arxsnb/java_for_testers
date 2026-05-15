@@ -10,7 +10,7 @@ public class ContactRemovalTest extends TestBase {
     @Test
     public void CanRemoveContact() {
 
-        if (!app.contacts().isContactPresent()){
+        if (app.contacts().getCount() == 0){
             app.contacts().createContact(new ContactData().withNames(
                     "First name Test " + System.currentTimeMillis() % 10000, "Middle name Test",
                     "Last name Test"));
