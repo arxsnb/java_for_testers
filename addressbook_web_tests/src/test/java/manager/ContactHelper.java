@@ -1,7 +1,6 @@
 package manager;
 
 import model.ContactData;
-import model.GroupData;
 import org.openqa.selenium.By;
 
 public class ContactHelper extends HelperBase {
@@ -56,7 +55,7 @@ public class ContactHelper extends HelperBase {
     public void removeContact() {
         openHomePage();
         selectContact();
-        removeSelectedContact();
+        removeSelectedContacts();
         returnToHomePage();
     }
 
@@ -71,7 +70,7 @@ public class ContactHelper extends HelperBase {
         click(By.name("selected[]"));
     }
 
-    private void removeSelectedContact() {
+    private void removeSelectedContacts() {
         click(By.name("delete"));
     }
 
@@ -80,4 +79,17 @@ public class ContactHelper extends HelperBase {
         return manager.driver.findElements(By.name("selected[]")).size();
     }
 
+    public void removeAllContacts() {
+        openHomePage();
+        selectAllContacts();
+
+    }
+
+    private void selectAllContacts() {
+        var checkboxes = manager.driver.findElements(By.name("selected[]"));
+        for (var checkbox : checkboxes) {
+            checkbox.click();
+        }
+        removeSelectedContacts();
+    }
 }
