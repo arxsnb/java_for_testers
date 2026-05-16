@@ -55,6 +55,10 @@ public class ContactHelper extends HelperBase {
         click(By.name("submit"));
     }
 
+    private void submitContactUpdate() {
+        click(By.name("update"));
+    }
+
 
     public void removeContact(ContactData contact) {
         openHomePage();
@@ -97,17 +101,21 @@ public class ContactHelper extends HelperBase {
         removeSelectedContacts();
     }
 
-//    public void modifyContact(ContactData contact, ContactData modifiedContact){
-//        openHomePage();
-//        selectContactmodify(contact);
-//
-//        fillContactForm(modifiedContact);
-//        submitContactCreation();
-//    }
-//
-//    private void selectContactmodify(ContactData contact) {
-//
-//    }
+    public void modifyContact(ContactData contact, ContactData modifiedContact){
+        openHomePage();
+        selectContactToEdit(contact);
+        fillContactForm(modifiedContact);
+        submitContactUpdate();
+        returnToHomePage();
+    }
+
+    private void selectContactToEdit(ContactData contact) {
+        click(By.cssSelector(String.format("a[href*='edit.php?id=%s']", contact.id())));
+    }
+
+    private void selectContactmodify(ContactData contact) {
+
+    }
 
 
     public List<ContactData> getList() {
