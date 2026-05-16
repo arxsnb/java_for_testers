@@ -118,8 +118,9 @@ public class ContactHelper extends HelperBase {
             var checkbox = tr.findElement(By.name("selected[]"));
             var id = checkbox.getAttribute("value");
 
-            var lastname = tr.findElement(By.cssSelector("td:nth-child(2)")).getText();
             var firstname = tr.findElement(By.cssSelector("td:nth-child(3)")).getText();
+            var lastname = tr.findElement(By.cssSelector("td:nth-child(2)")).getText();
+
 
             contacts.add(new ContactData()
                     .withId(id)
