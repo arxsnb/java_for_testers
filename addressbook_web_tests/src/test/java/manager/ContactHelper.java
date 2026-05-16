@@ -1,7 +1,11 @@
 package manager;
 
 import model.ContactData;
+import model.GroupData;
 import org.openqa.selenium.By;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactHelper extends HelperBase {
 
@@ -52,9 +56,9 @@ public class ContactHelper extends HelperBase {
     }
 
 
-    public void removeContact() {
+    public void removeContact(ContactData contact) {
         openHomePage();
-        selectContact();
+        selectContact(contact);
         removeSelectedContacts();
         returnToHomePage();
     }
@@ -66,8 +70,8 @@ public class ContactHelper extends HelperBase {
     }
 
 
-    private void selectContact() {
-        click(By.name("selected[]"));
+    private void selectContact(ContactData contact) {
+        click(By.cssSelector(String.format("input[value='%s']", contact.id())));
     }
 
     private void removeSelectedContacts() {
@@ -91,5 +95,38 @@ public class ContactHelper extends HelperBase {
             checkbox.click();
         }
         removeSelectedContacts();
+    }
+
+//    public void modifyContact(ContactData contact, ContactData modifiedContact){
+//        openHomePage();
+//        selectContactmodify(contact);
+//
+//        fillContactForm(modifiedContact);
+//        submitContactCreation();
+//    }
+//
+//    private void selectContactmodify(ContactData contact) {
+//
+//    }
+
+
+    public List<ContactData> getList() {
+        openHomePage();
+        var contacts = new ArrayList<ContactData>();
+        var trs = manager.driver.findElements(By.cssSelector("tr[name='entry']"));
+        for (var tr : trs) {
+            var checkbox = tr.findElement(By.name("selected[]"));
+            var id = checkbox.getAttribute("value");
+
+            var lastname = tr.findElement(By.cssSelector("td:nth-child(2)")).getText();
+            var firstname = tr.findElement(By.cssSelector("td:nth-child(3)")).getText();
+
+            contacts.add(new ContactData()
+                    .withId(id)
+                    .withNames(firstname, lastname)
+                    );
+
+        }
+        return contacts;
     }
 }
