@@ -48,7 +48,10 @@ public class ContactHelper extends HelperBase {
         type(By.name("title"),contact.title());
         type(By.name("company"),contact.company());
         type(By.name("address"),contact.address());
-        attach(By.name("photo"), contact.photo());
+//        attach(By.name("photo"), contact.photo());
+        if (contact.photo() != null && !contact.photo().isEmpty()) {
+            attach(By.name("photo"), contact.photo());
+        }
     }
 
 

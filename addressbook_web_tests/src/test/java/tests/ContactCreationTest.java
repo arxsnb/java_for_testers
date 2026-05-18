@@ -53,7 +53,8 @@ public class ContactCreationTest extends TestBase {
 //        ));
         var contact = new ContactData()
                 .withNames(randomString(10), randomString(10))
-                .withPhoto("src/test/resources/images/avatar.png");
+//                .withPhoto("src/test/resources/images/avatar.png");
+                .withPhoto(randomFile("src/test/resources/images"));
         app.contacts().createContact(contact);
         int newContactCount = app.contacts().getCount();
         Assertions.assertEquals(contactCount + 1, newContactCount);
