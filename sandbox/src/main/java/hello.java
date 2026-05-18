@@ -28,6 +28,8 @@ public class hello {
         var configFile = new File("sandbox/build.gradle");
         System.out.println(configFile.getAbsoluteFile());
         System.out.println(configFile.exists());
+        System.out.println(new File("").getAbsoluteFile());
+
     }
 
     private static int divide(int x, int y) {
