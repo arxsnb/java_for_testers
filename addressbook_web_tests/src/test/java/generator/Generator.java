@@ -2,7 +2,9 @@ package generator;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import common.CommonFunctions;
+import model.ContactData;
 import model.GroupData;
 import com.fasterxml.jackson.databind.ObjectMapper;        // ← правильный импорт
 import com.fasterxml.jackson.databind.SerializationFeature; // ← правильный импорт
@@ -47,10 +49,12 @@ public class Generator {
             ObjectMapper mapper = new ObjectMapper();
             mapper.enable(SerializationFeature.INDENT_OUTPUT);
             mapper.writeValue(new File(output), data);
+        } else if ("xml".equals(format)) {
+            XmlMapper mapper = new XmlMapper();
+            mapper.writeValue(new File(output), data);
         } else {
             throw new IllegalArgumentException("Неизвестный формат данных " + format);
         }
-
     }
 
     private Object generate() {
@@ -76,7 +80,12 @@ public class Generator {
     }
 
     private Object generateContacts() {
-        return null;
+        var result = new ArrayList<ContactData>();
+        for (int i = 0; i < 5; i++) {
+            result.add(new ContactData()
+                    .withNames(CommonFunctions.randomString(i * 10), CommonFunctions.randomString(i * 10)));
+        };
+        return result;
     }
 
 
