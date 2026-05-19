@@ -1,5 +1,6 @@
 package tests;
 
+import common.CommonFunctions;
 import model.ContactData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -24,8 +25,8 @@ public class ContactCreationTest extends TestBase {
 
         // Случайные контакты (5 штук)
         for (int i = 0; i < 5; i++) {
-            String randomStr = randomString(i * 10);
-            result.add(new ContactData().withNames(randomStr, randomStr));
+//            String randomStr = CommonFunctions.randomString(i * 10);
+            result.add(new ContactData().withNames(CommonFunctions.randomString(i * 10), CommonFunctions.randomString(i * 10)));
         }
 
         return result;
@@ -52,7 +53,7 @@ public class ContactCreationTest extends TestBase {
 //                "Company Test", "Address Test"
 //        ));
         var contact = new ContactData()
-                .withNames(randomString(10), randomString(10))
+                .withNames(CommonFunctions.randomString(10), CommonFunctions.randomString(10))
 //                .withPhoto("src/test/resources/images/avatar.png");
                 .withPhoto(randomFile("src/test/resources/images"));
         app.contacts().createContact(contact);
