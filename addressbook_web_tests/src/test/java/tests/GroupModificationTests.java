@@ -33,8 +33,10 @@ public class GroupModificationTests extends TestBase {
 
     @Test
     void canModifyGroup() {
+        app.groups().openGroupsPage();
         if (app.hbm().getGroupCount() == 0){
             app.hbm().createGroup(new GroupData("", "GR name", "GR header", "GR footer"));
+            app.groups().refreshPage();
         }
         var oldGroups = app.hbm().getGroupList();
         var rnd = new Random();

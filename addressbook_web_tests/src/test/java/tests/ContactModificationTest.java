@@ -12,12 +12,10 @@ public class ContactModificationTest extends TestBase {
 
     @Test
     void canModifyContact(){
-        app.groups().openGroupsPage();
         if (app.hbm().getContactCount() == 0){
             app.hbm().createContact(new ContactData().withNames(
                     "First name Test " + System.currentTimeMillis() % 10000,
                     "Last name Test"));
-            app.groups().refreshPage();
         }
         var oldContacts = app.hbm().getContactList();
         var rnd = new Random();
