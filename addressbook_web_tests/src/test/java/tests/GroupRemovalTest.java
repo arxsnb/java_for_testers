@@ -68,7 +68,6 @@ public class GroupRemovalTest extends TestBase {
     public void canRemoveAllGroupsAtOnce(){
         if (app.hbm().getGroupCount() == 0){
             app.hbm().createGroup(new GroupData("", "GR name", "GR header", "GR footer"));
-            app.groups().refreshPage();
         }
         app.groups().removeAllGroups();
         Assertions.assertEquals(0, app.hbm().getGroupCount());
