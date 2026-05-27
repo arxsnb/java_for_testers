@@ -2,7 +2,10 @@ package manager;
 
 import model.GroupData;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -115,5 +118,16 @@ public class GroupHelper extends HelperBase {
             groups.add(new GroupData().withId(id).withName(name));
         }
         return groups;
+    }
+
+    public void refreshPage() {
+        manager.driver.navigate().refresh();
+        waitForPageLoad();
+    }
+
+    private void waitForPageLoad() {
+        WebDriverWait wait = new WebDriverWait(manager.driver, Duration.ofSeconds(10));
+        wait.until(webDriver -> ((JavascriptExecutor) webDriver)
+                .executeScript("return document.readyState").equals("complete"));
     }
 }
