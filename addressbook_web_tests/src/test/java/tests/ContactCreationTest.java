@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
 
 public class ContactCreationTest extends TestBase {
 
@@ -153,6 +154,58 @@ public class ContactCreationTest extends TestBase {
 
         Assertions.assertEquals(oldRelated.size() + 1, newRelated.size());
         Assertions.assertEquals(newRelated, expectedList);
+    }
+
+
+
+    @Test
+    public void CanAddGroupToExistingContact() {
+
+        //Проверяем наличие контактов. если нет, то создаём
+        if (app.hbm().getContactCount() == 0){
+            app.hbm().createContact(new ContactData().withNames(
+                    "First name Test " + System.currentTimeMillis() % 10000,
+                    "Last name Test"));
+        }
+
+
+        // Проверяем наличие групп. создаём если нет
+        if (app.hbm().getGroupCount() == 0){
+            app.hbm().createGroup(new GroupData("", "GR name", "GR header", "GR footer"));
+        }
+
+
+        //Выбор случайного контакта
+        var contactList = app.hbm().getContactList();
+        var rnd = new Random();
+        var indexContact = rnd.nextInt(contactList.size());
+        var selectedContact = contactList.get(indexContact);
+
+        //Выбор случайной группы
+        var groupList = app.hbm().getGroupList();
+        var indexGroup = rnd.nextInt(groupList.size());
+        var selectedGroup = groupList.get(indexGroup);
+
+
+        //Получаем список контактов в группе ДО добавления
+        var oldContactsInGroup = app.hbm().getContactsInGroup(selectedGroup);
+
+        //Добавление группы в контакт
+        app.contacts().AddGroupToContact(selectedContact, selectedGroup);
+
+
+        var newContactsInGroup = app.hbm().getContactsInGroup(selectedGroup);
+
+        Comparator<ContactData> compareById = (o1, o2) ->
+                Integer.compare(Integer.parseInt(o1.id()), Integer.parseInt(o2.id()));
+        newContactsInGroup.sort(compareById);
+
+        var expectedList = new ArrayList<>(oldContactsInGroup);
+        expectedList.add(selectedContact);
+        expectedList.sort(compareById);
+
+
+        Assertions.assertEquals(newContactsInGroup, expectedList);
     }
 
 }
