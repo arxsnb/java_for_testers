@@ -85,6 +85,15 @@ public class ContactHelper extends HelperBase {
     }
 
 
+    public void AddGroupToContact(ContactData contact, GroupData group) {
+        openHomePage();
+        selectContact(contact);
+        selectAddGroup(group);
+        addToGroup();
+        openHomePage();
+    }
+
+
 
     private void returnToHomePage() {
         click(By.linkText("home page"));
@@ -95,8 +104,16 @@ public class ContactHelper extends HelperBase {
         click(By.cssSelector(String.format("input[value='%s']", contact.id())));
     }
 
+    private void selectAddGroup(GroupData group) {
+        click(By.cssSelector(String.format("select[name='to_group'] option[value='%s']", group.id())));
+    }
+
     private void removeSelectedContacts() {
         click(By.name("delete"));
+    }
+
+    private void addToGroup() {
+        click(By.name("add"));
     }
 
     public int getCount() {
