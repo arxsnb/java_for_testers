@@ -94,6 +94,24 @@ public class ContactHelper extends HelperBase {
     }
 
 
+    public void RemoveGroupFromContact(ContactData contact, GroupData group) {
+        openHomePage();
+        selectGroupFilter(group);
+        selectContact(contact);
+        removeFromGroup();
+        openHomePage();
+    }
+
+
+    private void selectGroupFilter(GroupData group) {
+        click(By.cssSelector(String.format("select[name='group'] option[value='%s']", group.id())));
+    }
+
+    private void removeFromGroup() {
+        click(By.name("remove"));
+    }
+
+
 
     private void returnToHomePage() {
         click(By.linkText("home page"));
