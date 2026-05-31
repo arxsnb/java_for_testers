@@ -121,4 +121,26 @@ public class ContactCreationTest extends TestBase {
         expectedList.sort(compareById);
         Assertions.assertEquals(newContacts, expectedList);
     }
+
+
+    @Test
+    public void CanCreateContactInGroup() {
+
+        var contact = new ContactData()
+                .withNames(CommonFunctions.randomString(10), CommonFunctions.randomString(10))
+                .withPhoto(randomFile("src/test/resources/images"));
+        if (app.hbm().getGroupCount() == 0){
+            app.hbm().createGroup(new GroupData("", "GR name", "GR header", "GR footer"));
+            app.groups().refreshPage();
+        }
+        var group = app.hbm().getGroupList().get(0);
+
+
+        var oldRelated = app.hbm().getContactsInGroup(group);
+        app.contacts().createContact(contact, group);
+
+        var newRelated = app.hbm().getContactsInGroup(group);
+        Assertions.assertEquals(oldRelated.size() + 1, newRelated.size());
+    }
+
 }
