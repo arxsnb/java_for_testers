@@ -3,6 +3,7 @@ package manager;
 import model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -100,11 +101,22 @@ public class GroupHelper extends HelperBase {
         removeSelectedGroups();
     }
 
+//    private void selectAllGroups() {
+//        var checkboxes = manager.driver.findElements(By.name("selected[]"));
+//        for (var checkbox : checkboxes) {
+//            checkbox.click();
+//        }
+//    }
+
+    //функциональный стиль
+//    private void selectAllGroups() {
+//        var checkboxes = manager.driver.findElements(By.name("selected[]"));
+//        checkboxes.forEach(checkbox -> checkbox.click());
+//    }
     private void selectAllGroups() {
-        var checkboxes = manager.driver.findElements(By.name("selected[]"));
-        for (var checkbox : checkboxes) {
-            checkbox.click();
-        }
+        manager.driver
+                .findElements(By.name("selected[]"))
+                .forEach(WebElement::click);
     }
 
     public List<GroupData> getList() {
