@@ -14,11 +14,14 @@ public class Geometry {
 //            Square.printSquareArea(square);
 //        }
 
-//        Consumer<Square> print = (square) -> {
-//            Square.printSquareArea(square);
-//        };
-        Consumer<Square> print = Square::printSquareArea;
+        Consumer<Square> print = (square) -> {
+            Square.printSquareArea(square);
+            Square.printSquarePerimeter(square);
+        };
+
         squares.forEach(print);
+//        Consumer<Square> print = Square::printSquareArea;
+//        squares.forEach(print);
 
 
 //        Square.printSquareArea(new Square(7.0));
