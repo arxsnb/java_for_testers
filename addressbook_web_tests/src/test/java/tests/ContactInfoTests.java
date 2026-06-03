@@ -34,4 +34,29 @@ public class ContactInfoTests extends TestBase {
         Assertions.assertEquals(expected, phones);
     }
 
+
+    @Test
+    void testEmails() {
+        if (app.hbm().getContactCount() == 0){
+            app.hbm().createContact(new ContactData()
+                    .withNames(
+                            "First name Test " + System.currentTimeMillis() % 10000,
+                            "Last name Test")
+                    .withEmail(CommonFunctions.randomEmail(5))
+                    .withEmail2(CommonFunctions.randomEmail(7))
+                    .withEmail3(CommonFunctions.randomEmail(10))
+            );
+            app.contacts().openHomePage();
+        }
+
+
+        var contacts = app.hbm().getContactList();
+        var contact = contacts.get(0);
+        var emails = app.contacts().getEmails(contact);
+        var expected = Stream.of(contact.email(), contact.email2(), contact.email3())
+                .filter(s -> s != null && ! "".equals(s))
+                .collect(Collectors.joining("\n"));
+        Assertions.assertEquals(expected, emails);
+    }
+
 }

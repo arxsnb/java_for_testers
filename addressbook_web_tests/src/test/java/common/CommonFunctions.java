@@ -41,8 +41,18 @@ public class CommonFunctions {
         return result;
     }
 
+    public static String randomEmail(int n) {
+        var rnd = new Random();
+        String domain = "@test.com";
 
+        Supplier<Integer> randomNumbers = () -> rnd.nextInt(26);  // 0-25 для букв
+        var localPart = Stream.generate(randomNumbers)
+                .limit(n)
+                .map(i -> 'a' + i)
+                .map(Character::toString)
+                .collect(Collectors.joining());
 
-
+        return localPart + domain;
+    }
 
 }
