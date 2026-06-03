@@ -201,14 +201,13 @@ public class GroupCreationTest extends TestBase {
         var oldGroups = app.hbm().getGroupList(); // jdbc
         app.groups().createGroup(group);
         var newGroups = app.hbm().getGroupList();
-        var maxId =newGroups.get(newGroups.size() - 1).id();
 
         // из одного списка вычитаем второй, получаем уникальные
         var extraGroups = newGroups.stream().filter(g -> !oldGroups.contains(g)).toList();
         var newId = extraGroups.get(0).id();
 
         var expectedList = new ArrayList<>(oldGroups);
-        expectedList.add(group.withId(maxId));
+        expectedList.add(group.withId(newId));
         Assertions.assertEquals(Set.of(newGroups), Set.of(expectedList));
 
     }
