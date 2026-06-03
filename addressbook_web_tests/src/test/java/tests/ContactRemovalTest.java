@@ -1,6 +1,7 @@
 package tests;
 
 import model.ContactData;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -8,6 +9,12 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class ContactRemovalTest extends TestBase {
+
+    @AfterEach
+    void cleanUpDatabase() {
+        // Очищаем битые записи после каждого теста
+        app.jdbc().cleanBrokenEntries();
+    }
 
 //    @Test
 //    public void CanRemoveContact() {

@@ -90,4 +90,21 @@ public class JdbcHelper extends HelperBase {
 //            throw new RuntimeException(e);
 //        }
 //    }
+
+
+    public void cleanBrokenEntries() {
+        try (var conn = DriverManager.getConnection("jdbc:mysql://localhost/addressbook?zeroDateTimeBehavior=convertToNull&useSSL=false", "root", "");
+             var statement = conn.createStatement()) {
+
+            int deleted = statement.executeUpdate(
+                    "DELETE ag FROM `address_in_groups` ag LEFT JOIN addressbook ab ON ab.id = ag.id WHERE ab.id IS NULL");
+
+            if (deleted > 0) {
+                System.out.println("✓ Deleted " + deleted + " corrupted entries from address_in_groups");
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
