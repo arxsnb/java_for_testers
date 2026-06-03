@@ -99,7 +99,10 @@ public class HibernateHelper extends HelperBase {
                         "" + record.id,
                         record.firstname,
                         record.lastname
-                );
+                )
+                .withHome(record.home)
+                .withMobile(record.mobile)
+                .withWork(record.work);
     }
 
     private static ContactRecord convertContact(ContactData data) {

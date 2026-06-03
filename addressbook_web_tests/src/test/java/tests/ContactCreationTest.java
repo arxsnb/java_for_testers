@@ -118,7 +118,10 @@ public class ContactCreationTest extends TestBase {
         var maxId = newContacts.get(newContacts.size() - 1).id();
 
         var expectedList = new ArrayList<>(oldContacts);
-        expectedList.add(contact.withId(maxId));
+        expectedList.add(contact.withId(maxId)
+                .withHome("")
+                .withMobile("")
+                .withWork(""));
         expectedList.sort(compareById);
         Assertions.assertEquals(newContacts, expectedList);
     }
