@@ -113,7 +113,10 @@ public class HibernateHelper extends HelperBase {
         return new ContactRecord(
                         Integer.parseInt(id),
                         data.firstname(),
-                        data.lastname()
+                        data.lastname(),
+                  data.home(),
+                data.mobile(),
+                data.work()
                 );
     }
 

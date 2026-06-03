@@ -31,6 +31,18 @@ public class CommonFunctions {
         return result;
     }
 
+    public static String randomDigits(int n) {
+        var rnd = new Random();
+        Supplier<Integer> randomNumbers = () -> rnd.nextInt(10);  // 0-9
+        var result = Stream.generate(randomNumbers)
+                .limit(n)
+                .map(String::valueOf)
+                .collect(Collectors.joining());
+        return result;
+    }
+
+
+
 
 
 }

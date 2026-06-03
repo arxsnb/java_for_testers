@@ -1,5 +1,7 @@
 package tests;
 
+import common.CommonFunctions;
+import model.ContactData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +12,19 @@ public class ContactInfoTests extends TestBase {
 
     @Test
     void testPhones() {
-        //добавить проверку что контакты есть
+        if (app.hbm().getContactCount() == 0){
+            app.hbm().createContact(new ContactData()
+                    .withNames(
+                    "First name Test " + System.currentTimeMillis() % 10000,
+                    "Last name Test")
+                    .withHome(CommonFunctions.randomDigits(10))
+                    .withMobile(CommonFunctions.randomDigits(10))
+                    .withWork(CommonFunctions.randomDigits(10))
+            );
+            app.contacts().openHomePage();
+        }
+
+
         var contacts = app.hbm().getContactList();
         var contact = contacts.get(0);
         var phones = app.contacts().getPhones(contact);
