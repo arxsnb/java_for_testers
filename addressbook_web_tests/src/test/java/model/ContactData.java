@@ -12,11 +12,13 @@ public record ContactData (
         String photo,
         String home,
         String mobile,
-        String work
-){
+        String work,
+        String email,
+        String email2,
+        String email3){
 
     public ContactData(){
-        this("", "", "", "", "", "", "", "", "", "", "", "");
+        this("", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
     }
 
     public ContactData withIdNames(String id, String firstname, String lastname) {
@@ -32,8 +34,11 @@ public record ContactData (
                 this.photo,
                 this.home,
                 this.mobile,
-                this.work
-        );
+                this.work,
+                this.email,
+                this.email2,
+                this.email3
+                );
     }
 
     public ContactData withNames(String firstname, String lastname) {
@@ -49,8 +54,10 @@ public record ContactData (
                 this.photo,
                 this.home,
                 this.mobile,
-                this.work
-        );
+                this.work,
+                this.email,
+                this.email2,
+                this.email3);
     }
 
     public ContactData withId(String id) {
@@ -66,8 +73,10 @@ public record ContactData (
                 this.photo,
                 this.home,
                 this.mobile,
-                this.work
-        );
+                this.work,
+                this.email,
+                this.email2,
+                this.email3);
     }
     public ContactData withPhoto(String photo) {
         return new ContactData(
@@ -82,8 +91,10 @@ public record ContactData (
                 photo,
                 this.home,
                 this.mobile,
-                this.work
-        );
+                this.work,
+                this.email,
+                this.email2,
+                this.email3);
     }
 
 
@@ -100,8 +111,10 @@ public record ContactData (
                 this.photo,
                 home,
                 this.mobile,
-                this.work
-        );
+                this.work,
+                this.email,
+                this.email2,
+                this.email3);
     }
 
     public ContactData withMobile(String mobile) {
@@ -117,8 +130,10 @@ public record ContactData (
                 this.photo,
                 this.home,
                 mobile,
-                this.work
-        );
+                this.work,
+                this.email,
+                this.email2,
+                this.email3);
     }
 
     public ContactData withWork(String work) {
@@ -134,11 +149,13 @@ public record ContactData (
                 this.photo,
                 this.home,
                 this.mobile,
-                work
-        );
+                work,
+                this.email,
+                this.email2,
+                this.email3);
     }
 
-    public ContactData withSecondary(String secondary) {
+    public ContactData withEmail(String email) {
         return new ContactData(
                 this.id,
                 this.firstname,
@@ -151,8 +168,48 @@ public record ContactData (
                 this.photo,
                 this.home,
                 this.mobile,
-                this.work
-        );
+                this.work,
+                email,
+                this.email2,
+                this.email3);
+    }
+
+    public ContactData withEmail2(String email2) {
+        return new ContactData(
+                this.id,
+                this.firstname,
+                this.middlename,
+                this.lastname,
+                this.nickname,
+                this.title,
+                this.company,
+                this.address,
+                this.photo,
+                this.home,
+                this.mobile,
+                this.work,
+                this.email,
+                email2,
+                this.email3);
+    }
+
+    public ContactData withEmail3(String email3) {
+        return new ContactData(
+                this.id,
+                this.firstname,
+                this.middlename,
+                this.lastname,
+                this.nickname,
+                this.title,
+                this.company,
+                this.address,
+                this.photo,
+                this.home,
+                this.mobile,
+                this.work,
+                this.email,
+                this.email2,
+                email3);
     }
 
 }

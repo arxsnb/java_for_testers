@@ -102,7 +102,10 @@ public class HibernateHelper extends HelperBase {
                 )
                 .withHome(record.home)
                 .withMobile(record.mobile)
-                .withWork(record.work);
+                .withWork(record.work)
+                .withEmail(record.email)
+                .withEmail2(record.email2)
+                .withEmail3(record.email3);
     }
 
     private static ContactRecord convertContact(ContactData data) {
@@ -114,9 +117,12 @@ public class HibernateHelper extends HelperBase {
                         Integer.parseInt(id),
                         data.firstname(),
                         data.lastname(),
-                  data.home(),
-                data.mobile(),
-                data.work()
+                        data.home(),
+                        data.mobile(),
+                        data.work(),
+                        data.email(),
+                        data.email2(),
+                        data.email3()
                 );
     }
 

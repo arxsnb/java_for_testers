@@ -121,7 +121,10 @@ public class ContactCreationTest extends TestBase {
         expectedList.add(contact.withId(maxId)
                 .withHome("")
                 .withMobile("")
-                .withWork(""));
+                .withWork("")
+                .withEmail("")
+                .withEmail2("")
+                .withEmail3(""));
         expectedList.sort(compareById);
         Assertions.assertEquals(newContacts, expectedList);
     }
