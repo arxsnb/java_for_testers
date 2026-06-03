@@ -175,20 +175,56 @@ public class ContactCreationTest extends TestBase {
         }
 
 
-        //Выбор случайного контакта
-        var contactList = app.hbm().getContactList();
-        var rnd = new Random();
-        var indexContact = rnd.nextInt(contactList.size());
-        var selectedContact = contactList.get(indexContact);
-
-        //Выбор случайной группы
+        // Выбор случайной группы
         var groupList = app.hbm().getGroupList();
+        var rnd = new Random();
         var indexGroup = rnd.nextInt(groupList.size());
         var selectedGroup = groupList.get(indexGroup);
 
+        // Получаем список ВСЕХ контактов
+        var allContacts = app.hbm().getContactList();
 
-        //Получаем список контактов в группе ДО добавления
+        // Получаем список контактов, которые уже в группе
         var oldContactsInGroup = app.hbm().getContactsInGroup(selectedGroup);
+
+        // Вычетаем из всех те что в группе
+        var availableContacts = new ArrayList<ContactData>();
+        for (var contact : allContacts) {
+            boolean alreadyInGroup = false;
+            for (var groupContact : oldContactsInGroup) {
+                if (groupContact.id().equals(contact.id())) {
+                    alreadyInGroup = true;
+                    break;
+                }
+            }
+            if (!alreadyInGroup) {
+                availableContacts.add(contact);
+            }
+        }
+
+
+        // Выбираем контакт (создаём если нет доступных)
+        ContactData selectedContact;
+        if (availableContacts.isEmpty()) {
+            var newContact = new ContactData().withNames(
+                    "First name Test " + System.currentTimeMillis() % 10000,
+                    "Last name Test " + System.currentTimeMillis() % 10000);
+            app.hbm().createContact(newContact);
+
+            // Получаем список контактов после создания
+            var allContactsAfter = app.hbm().getContactList();
+
+            // Сортируем по ID
+            Comparator<ContactData> compareById = (o1, o2) ->
+                    Integer.compare(Integer.parseInt(o1.id()), Integer.parseInt(o2.id()));
+            allContactsAfter.sort(compareById);
+
+            // Берём последний контакт (с максимальным ID)
+            selectedContact = allContactsAfter.get(allContactsAfter.size() - 1);
+        } else {
+            var indexContact = rnd.nextInt(availableContacts.size());
+            selectedContact = availableContacts.get(indexContact);
+        }
 
         //Добавление группы в контакт
         app.contacts().AddGroupToContact(selectedContact, selectedGroup);
