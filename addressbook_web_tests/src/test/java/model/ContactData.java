@@ -60,6 +60,25 @@ public record ContactData (
                 this.email3);
     }
 
+    public ContactData withAddress(String address) {
+        return new ContactData(
+                this.id,
+                this.firstname,
+                this.middlename,
+                this.lastname,
+                this.nickname,
+                this.title,
+                this.company,
+                address,
+                this.photo,
+                this.home,
+                this.mobile,
+                this.work,
+                this.email,
+                this.email2,
+                this.email3);
+    }
+
     public ContactData withId(String id) {
         return new ContactData(
                 id,

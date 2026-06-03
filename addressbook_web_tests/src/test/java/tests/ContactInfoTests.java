@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 public class ContactInfoTests extends TestBase {
 
     @Test
-    void testPhones() {
+    void testPhonesOnHomePage() {
         if (app.hbm().getContactCount() == 0){
             app.hbm().createContact(new ContactData()
                     .withNames(
@@ -36,7 +36,7 @@ public class ContactInfoTests extends TestBase {
 
 
     @Test
-    void testEmails() {
+    void testEmailsOnHomePage() {
         if (app.hbm().getContactCount() == 0){
             app.hbm().createContact(new ContactData()
                     .withNames(
@@ -57,6 +57,28 @@ public class ContactInfoTests extends TestBase {
                 .filter(s -> s != null && ! "".equals(s))
                 .collect(Collectors.joining("\n"));
         Assertions.assertEquals(expected, emails);
+    }
+
+    @Test
+    void testAddressOnHomePage() {
+        if (app.hbm().getContactCount() == 0){
+            app.hbm().createContact(new ContactData()
+                    .withNames(
+                            "First name Test " + System.currentTimeMillis() % 10000,
+                            "Last name Test")
+                    .withAddress(CommonFunctions.randomAddress())
+            );
+            app.contacts().openHomePage();
+        }
+
+
+        var contacts = app.hbm().getContactList();
+        var contact = contacts.get(0);
+        var address = app.contacts().getAddress(contact);
+        var expected = Stream.of(contact.address())
+                .filter(s -> s != null && ! "".equals(s))
+                .collect(Collectors.joining("\n"));
+        Assertions.assertEquals(expected, address);
     }
 
 }

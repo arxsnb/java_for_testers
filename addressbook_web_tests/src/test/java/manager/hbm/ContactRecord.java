@@ -31,10 +31,11 @@ public class ContactRecord {
 
     }
 
-    public ContactRecord(int id, String firstname, String lastname, String home, String mobile, String work, String email, String email2, String email3) {
+    public ContactRecord(int id, String firstname, String lastname, String address, String home, String mobile, String work, String email, String email2, String email3) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
+        this.address = address;
         this.home = home;
         this.mobile = mobile;
         this.work = work;

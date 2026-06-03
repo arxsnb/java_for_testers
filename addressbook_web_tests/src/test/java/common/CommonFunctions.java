@@ -1,5 +1,6 @@
 package common;
 
+import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -53,6 +54,20 @@ public class CommonFunctions {
                 .collect(Collectors.joining());
 
         return localPart + domain;
+    }
+
+
+    public static String randomAddress() {
+        var rnd = new Random();
+        var streets = List.of("Ленина", "Советская", "Мира", "Пушкина", "Гагарина");
+        var cities = List.of("Москва", "Санкт-Петербург", "Новосибирск", "Екатеринбург", "Казань");
+
+        var streetNum = rnd.nextInt(100) + 1;
+        var street = streets.get(rnd.nextInt(streets.size()));
+        var city = cities.get(rnd.nextInt(cities.size()));
+
+        return String.format("%s\nул. %s, д. %d",
+                city, street, streetNum);
     }
 
 }
