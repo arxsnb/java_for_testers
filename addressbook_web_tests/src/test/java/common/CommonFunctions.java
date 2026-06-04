@@ -66,7 +66,7 @@ public class CommonFunctions {
         var street = streets.get(rnd.nextInt(streets.size()));
         var city = cities.get(rnd.nextInt(cities.size()));
 
-        return String.format("%s\nул. %s, д. %d",
+        return String.format("%s ул. %s, д. %d",
                 city, street, streetNum);
     }
 

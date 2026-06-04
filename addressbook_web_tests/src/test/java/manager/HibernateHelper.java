@@ -100,6 +100,7 @@ public class HibernateHelper extends HelperBase {
                         record.firstname,
                         record.lastname
                 )
+                .withAddress(record.address)
                 .withHome(record.home)
                 .withMobile(record.mobile)
                 .withWork(record.work)
@@ -117,6 +118,7 @@ public class HibernateHelper extends HelperBase {
                         Integer.parseInt(id),
                         data.firstname(),
                         data.lastname(),
+                        data.address(),
                         data.home(),
                         data.mobile(),
                         data.work(),
@@ -143,6 +145,15 @@ public class HibernateHelper extends HelperBase {
         sessionFactory.inSession(session -> {
             session.getTransaction().begin();
             session.persist(convertContact(contactData));
+            session.getTransaction().commit();
+        });
+    }
+
+    // Обновление контакта
+    public void modifyContact(ContactData contactData) {
+        sessionFactory.inSession(session -> {
+            session.getTransaction().begin();
+            session.merge(convertContact(contactData));
             session.getTransaction().commit();
         });
     }

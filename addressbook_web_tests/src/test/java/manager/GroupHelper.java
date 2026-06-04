@@ -151,7 +151,7 @@ public class GroupHelper extends HelperBase {
         waitForPageLoad();
     }
 
-    private void waitForPageLoad() {
+    public void waitForPageLoad() {
         WebDriverWait wait = new WebDriverWait(manager.driver, Duration.ofSeconds(10));
         wait.until(webDriver -> ((JavascriptExecutor) webDriver)
                 .executeScript("return document.readyState").equals("complete"));

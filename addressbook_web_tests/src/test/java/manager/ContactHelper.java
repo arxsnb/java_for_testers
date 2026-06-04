@@ -7,6 +7,8 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ContactHelper extends HelperBase {
 
@@ -53,19 +55,44 @@ public class ContactHelper extends HelperBase {
         new Select(manager.driver.findElement(By.name("new_group"))).selectByValue(group.id());
     }
 
-    private void fillContactForm(ContactData contact) {
-        type(By.name("firstname"),contact.firstname());
-        type(By.name("middlename"),contact.middlename());
-        type(By.name("lastname"),contact.lastname());
-        type(By.name("nickname"),contact.nickname());
-        type(By.name("title"),contact.title());
-        type(By.name("company"),contact.company());
-        type(By.name("address"),contact.address());
-//        attach(By.name("photo"), contact.photo());
-        if (contact.photo() != null && !contact.photo().isEmpty()) {
-            attach(By.name("photo"), contact.photo());
-        }
+//    private void fillContactForm(ContactData contact) {
+//        type(By.name("firstname"),contact.firstname());
+//        type(By.name("middlename"),contact.middlename());
+//        type(By.name("lastname"),contact.lastname());
+//        type(By.name("nickname"),contact.nickname());
+//        type(By.name("title"),contact.title());
+//        type(By.name("company"),contact.company());
+//        type(By.name("address"),contact.address());
+////        attach(By.name("photo"), contact.photo());
+//        if (contact.photo() != null && !contact.photo().isEmpty()) {
+//            attach(By.name("photo"), contact.photo());
+//        }
+//    }
+
+private void fillContactForm(ContactData contact) {
+    type(By.name("firstname"), contact.firstname());
+    type(By.name("middlename"), contact.middlename());
+    type(By.name("lastname"), contact.lastname());
+    type(By.name("nickname"), contact.nickname());
+    type(By.name("title"), contact.title());
+    type(By.name("company"), contact.company());
+    type(By.name("address"), contact.address());
+
+    // ТЕЛЕФОНЫ
+    type(By.name("home"), contact.home());
+    type(By.name("mobile"), contact.mobile());
+    type(By.name("work"), contact.work());
+
+    // EMAIL'ы
+    type(By.name("email"), contact.email());
+    type(By.name("email2"), contact.email2());
+    type(By.name("email3"), contact.email3());
+
+    // Фото
+    if (contact.photo() != null && !contact.photo().isEmpty()) {
+        attach(By.name("photo"), contact.photo());
     }
+}
 
 
     private void submitContactCreation() {
@@ -161,6 +188,13 @@ public class ContactHelper extends HelperBase {
         returnToHomePage();
     }
 
+    // Открытие формы редактирования
+    public void openEditForm(ContactData contact) {
+        openHomePage();
+        click(By.cssSelector(String.format("a[href*='edit.php?id=%s']", contact.id())));
+    }
+
+
     private void selectContactToEdit(ContactData contact) {
         click(By.cssSelector(String.format("a[href*='edit.php?id=%s']", contact.id())));
     }
@@ -206,4 +240,33 @@ public class ContactHelper extends HelperBase {
         return manager.driver.findElement(By.xpath(
                 String.format("//tr[.//input[@id='%s']]/td[4]", contact.id()))).getText();
     }
+
+
+    // Получение всех телефонов из формы редактирования
+    public String getPhonesFromEditForm() {
+        var home = manager.driver.findElement(By.name("home")).getAttribute("value");
+        var mobile = manager.driver.findElement(By.name("mobile")).getAttribute("value");
+        var work = manager.driver.findElement(By.name("work")).getAttribute("value");
+
+        return Stream.of(home, mobile, work)
+                .filter(s -> s != null && !s.isEmpty())
+                .collect(Collectors.joining("\n"));
+    }
+
+    // Получение всех email из формы редактирования
+    public String getEmailsFromEditForm() {
+        var email = manager.driver.findElement(By.name("email")).getAttribute("value");
+        var email2 = manager.driver.findElement(By.name("email2")).getAttribute("value");
+        var email3 = manager.driver.findElement(By.name("email3")).getAttribute("value");
+
+        return Stream.of(email, email2, email3)
+                .filter(s -> s != null && !s.isEmpty())
+                .collect(Collectors.joining("\n"));
+    }
+
+    // Получение адреса из формы редактирования
+    public String getAddressFromEditForm() {
+        return manager.driver.findElement(By.name("address")).getAttribute("value");
+    }
+
 }
