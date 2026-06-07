@@ -11,29 +11,80 @@ import java.util.stream.Stream;
 
 public class ContactInfoTests extends TestBase {
 
+//    @Test
+//    void testPhonesOnHomePage() {
+//        if (app.hbm().getContactCount() == 0){
+//            app.hbm().createContact(new ContactData()
+//                    .withNames(
+//                    "First name Test " + System.currentTimeMillis() % 10000,
+//                    "Last name Test")
+//                    .withHome(CommonFunctions.randomDigits(10))
+//                    .withMobile(CommonFunctions.randomDigits(10))
+//                    .withWork(CommonFunctions.randomDigits(10))
+//            );
+//            app.contacts().openHomePage();
+//        }
+//
+//
+//        var contacts = app.hbm().getContactList();
+//        var contact = contacts.get(0);
+//        app.contacts().openHomePage();
+//        var phones = app.contacts().getPhones(contact);
+//        var expected = Stream.of(contact.home(), contact.mobile(), contact.work())
+//                .filter(s -> s != null && ! "".equals(s))
+//                .collect(Collectors.joining("\n"));
+//        Assertions.assertEquals(expected, phones);
+//    }
+
+
+    // просмотр всех контактов
+//    @Test
+//    void testPhonesOnHomePage() {
+//        if (app.hbm().getContactCount() == 0){
+//            app.hbm().createContact(new ContactData()
+//                    .withNames(
+//                            "First name Test " + System.currentTimeMillis() % 10000,
+//                            "Last name Test")
+//                    .withHome(CommonFunctions.randomDigits(10))
+//                    .withMobile(CommonFunctions.randomDigits(10))
+//                    .withWork(CommonFunctions.randomDigits(10))
+//            );
+//            app.contacts().openHomePage();
+//        }
+//        var contacts = app.hbm().getContactList();
+//        for (var contact : contacts) {
+//            app.contacts().openHomePage();
+//            var phones = app.contacts().getPhones(contact);
+//            var expected = Stream.of(contact.home(), contact.mobile(), contact.work())
+//                    .filter(s -> s != null && ! "".equals(s))
+//                    .collect(Collectors.joining("\n"));
+//            Assertions.assertEquals(expected, phones);
+//        }
+//    }
+
+    //через MAP
     @Test
     void testPhonesOnHomePage() {
         if (app.hbm().getContactCount() == 0){
             app.hbm().createContact(new ContactData()
                     .withNames(
-                    "First name Test " + System.currentTimeMillis() % 10000,
-                    "Last name Test")
+                            "First name Test " + System.currentTimeMillis() % 10000,
+                            "Last name Test")
                     .withHome(CommonFunctions.randomDigits(10))
                     .withMobile(CommonFunctions.randomDigits(10))
                     .withWork(CommonFunctions.randomDigits(10))
             );
             app.contacts().openHomePage();
         }
-
-
         var contacts = app.hbm().getContactList();
-        var contact = contacts.get(0);
-        app.contacts().openHomePage();
-        var phones = app.contacts().getPhones(contact);
-        var expected = Stream.of(contact.home(), contact.mobile(), contact.work())
-                .filter(s -> s != null && ! "".equals(s))
-                .collect(Collectors.joining("\n"));
+        var expected = contacts.stream().collect(Collectors.toMap(ContactData::id, contact ->
+            Stream.of(contact.home(), contact.mobile(), contact.work())
+                    .filter(s -> s != null && ! "".equals(s))
+                    .collect(Collectors.joining("\n"))
+        ));
+        var phones = app.contacts().getPhones();
         Assertions.assertEquals(expected, phones);
+
     }
 
 

@@ -3,10 +3,13 @@ package manager;
 import model.ContactData;
 import model.GroupData;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -269,4 +272,33 @@ private void fillContactForm(ContactData contact) {
         return manager.driver.findElement(By.name("address")).getAttribute("value");
     }
 
+//    public Map<String, String> getPhones() {
+//    var result = new HashMap<String, String>();
+//       List<WebElement> rows= manager.driver.findElements(By.name("entry"));
+//       for (WebElement row : rows) {
+//           var id = row.findElement(By.name("input")).getAttribute("id");
+//           var phones = row.findElements(By.name("td")).get(5).getText();
+//           result.put(id, phones);
+//       }
+//       return result;
+//    }
+
+    public Map<String, String> getPhones() {
+        var result = new HashMap<String, String>();
+
+        // Находим все строки с контактами
+        var rows = manager.driver.findElements(By.cssSelector("tr[name='entry']"));
+
+        for (var row : rows) {
+            // Находим чекбокс (input) внутри строки
+            var checkbox = row.findElement(By.name("selected[]"));
+            var id = checkbox.getAttribute("value");
+
+            // Находим 6-й столбец (телефоны) — индексация с 0
+            var phones = row.findElements(By.tagName("td")).get(5).getText();
+
+            result.put(id, phones);
+        }
+        return result;
+    }
 }
