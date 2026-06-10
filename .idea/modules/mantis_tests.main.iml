@@ -10,6 +10,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-remote-driver:4.24.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.eclipse.angus:angus-mail:2.0.2" level="project" />
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-http:4.24.0" level="project" />
     <orderEntry type="library" name="Gradle: com.google.auto.service:auto-service-annotations:1.1.1" level="project" />
     <orderEntry type="library" name="Gradle: com.google.guava:guava:33.3.0-jre" level="project" />
@@ -27,6 +28,8 @@
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-json:4.24.0" level="project" />
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-os:4.24.0" level="project" />
     <orderEntry type="library" name="Gradle: org.seleniumhq.selenium:selenium-api:4.24.0" level="project" />
+    <orderEntry type="library" name="Gradle: jakarta.mail:jakarta.mail-api:2.1.2" level="project" />
+    <orderEntry type="library" name="Gradle: jakarta.activation:jakarta.activation-api:2.1.2" level="project" />
     <orderEntry type="library" name="Gradle: dev.failsafe:failsafe:3.3.2" level="project" />
     <orderEntry type="library" name="Gradle: com.google.guava:failureaccess:1.0.2" level="project" />
     <orderEntry type="library" name="Gradle: com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava" level="project" />
@@ -38,6 +41,7 @@
     <orderEntry type="library" name="Gradle: io.opentelemetry:opentelemetry-sdk-logs:1.41.0" level="project" />
     <orderEntry type="library" name="Gradle: org.apache.commons:commons-exec:1.4.0" level="project" />
     <orderEntry type="library" name="Gradle: org.jspecify:jspecify:1.0.0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: org.eclipse.angus:angus-activation:2.0.1" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: io.opentelemetry:opentelemetry-api-incubator:1.41.0-alpha" level="project" />
   </component>
 </module>
