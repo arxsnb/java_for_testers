@@ -32,9 +32,9 @@ public class SessionHelper extends HelperBase {
         manager.driver().get(confirmationLink);
         waitForPageLoad();
 
-        type(By.id("realname"), username);
-        type(By.id("password"), password);
-        type(By.id("password-confirm"), password);
+        type(By.name("realname"), username);
+        type(By.name("password"), password);
+        type(By.name("password_confirm"), password);
 
         click(By.cssSelector("button.btn-success"));
         waitForPageLoad();
