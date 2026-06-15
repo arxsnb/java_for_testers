@@ -56,4 +56,42 @@ public class UserRegistrationTests extends TestBase {
 
     }
 
+
+    @Test
+    void canRegisterUserRest() {
+
+        // Генерируем уникальное имя пользователя
+        var username = CommonFunctions.randomString(8);
+        var email = String.format("%s@localhost", username);
+        var password = "password";
+        System.out.println(email);
+
+
+        // создать емейл на почтовом сервере (джеймс хелпер)
+        app.jamesApi().addUser(
+                email,
+                password);
+
+        // открыть браузер заполнить форму, отправляем (браузер)
+        app.session().registration(username, email);
+
+        // ждём почту (мейл хелпер)
+        var messages = app.mail().receive(email, password, Duration.ofSeconds(30));
+        Assertions.assertFalse(messages.isEmpty(), "No email received");
+        System.out.println(messages);
+
+        // извлекаем ссылку
+        var url = app.mail().getConfirmationLink(messages);
+        System.out.println("Confirmation link: " + url);
+
+
+        // в браузере проходим по ссылке. завершаем регестрацию (бруазуер)
+        app.session().finishRegistration(url, username, password);
+
+        //проверяем что пользователь может залогиниться (HttpSessionHelper)
+        app.http().login(username, password);
+        Assertions.assertTrue(app.http().isLoggedIn());
+
+    }
+
 }
