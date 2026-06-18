@@ -72,8 +72,8 @@ public class UserRegistrationTests extends TestBase {
                 email,
                 password);
 
-        // открыть браузер заполнить форму, отправляем (браузер)
-        app.session().registration(username, email);
+        // создание нового юзера (рест апи)
+        app.rest().registration(username, email);
 
         // ждём почту (мейл хелпер)
         var messages = app.mail().receive(email, password, Duration.ofSeconds(30));
