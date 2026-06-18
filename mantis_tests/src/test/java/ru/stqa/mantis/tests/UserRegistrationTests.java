@@ -67,7 +67,7 @@ public class UserRegistrationTests extends TestBase {
         System.out.println(email);
 
 
-        // создать емейл на почтовом сервере (джеймс хелпер)
+        // создать емейл на почтовом сервере (джеймс апи хелпер)
         app.jamesApi().addUser(
                 email,
                 password);
