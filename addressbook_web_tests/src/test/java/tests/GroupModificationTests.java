@@ -33,7 +33,7 @@ public class GroupModificationTests extends TestBase {
 //        Assertions.assertEquals(newGroups, expectedList);
 //    }
 
-    @Test
+//    @Test
 //    void canModifyGroup() {
 //        app.groups().openGroupsPage();
 //        if (app.hbm().getGroupCount() == 0){
@@ -56,6 +56,7 @@ public class GroupModificationTests extends TestBase {
 //        Assertions.assertEquals(newGroups, expectedList);
 //    }
 
+    @Test
     void canModifyGroup() {
         app.groups().openGroupsPage();
         if (app.hbm().getGroupCount() == 0){
