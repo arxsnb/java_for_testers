@@ -172,7 +172,7 @@ public class ContactCreationTest extends TestBase {
         Allure.step("Создание группы, если её нет", step -> {
             if (app.hbm().getGroupCount() == 0){
                 app.hbm().createGroup(new GroupData("", "GR name", "GR header", "GR footer"));
-                app.groups().refreshPage();
+                app.groups().openGroupsPage();
             }
         });
 
