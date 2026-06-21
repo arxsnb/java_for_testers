@@ -3,6 +3,7 @@ package tests;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import common.CommonFunctions;
+import io.qameta.allure.Allure;
 import model.ContactData;
 import model.GroupData;
 import org.junit.jupiter.api.Assertions;
@@ -161,6 +162,62 @@ public class ContactCreationTest extends TestBase {
         Assertions.assertEquals(oldRelated.size() + 1, newRelated.size());
         Assertions.assertEquals(newRelated, expectedList);
     }
+
+    @Test
+    public void CanCreateContactInGroupAllure() {
+
+        var contact = new ContactData()
+                .withNames(CommonFunctions.randomString(10), CommonFunctions.randomString(10));
+
+        Allure.step("Создание группы, если её нет", step -> {
+            if (app.hbm().getGroupCount() == 0){
+                app.hbm().createGroup(new GroupData("", "GR name", "GR header", "GR footer"));
+                app.groups().refreshPage();
+            }
+        });
+
+        var group = app.hbm().getGroupList().get(0);
+
+
+
+
+        // Получение списка контактов ДО создания
+        Allure.step("Получение списка контактов в группе ДО создания", step -> {
+            step.parameter("group", group.name());
+            step.parameter("group.id", group.id());
+        });
+
+        var oldRelated = app.hbm().getContactsInGroup(group);
+
+        app.contacts().createContact(contact, group);
+
+        // Получение списка контактов ПОСЛЕ создания
+        Allure.step("Получение списка контактов в группе ПОСЛЕ создания", step -> {
+            var newRelated = app.hbm().getContactsInGroup(group);
+            step.parameter("contacts.after", newRelated.size());
+        });
+
+        var newRelated = app.hbm().getContactsInGroup(group);
+
+        Comparator<ContactData> compareById = (o1, o2) -> {
+            return Integer.compare(Integer.parseInt(o1.id()), Integer.parseInt(o2.id()));
+        };
+        newRelated.sort(compareById);
+        var maxId = newRelated.get(newRelated.size() - 1).id();
+
+        var expectedList = new ArrayList<>(oldRelated);
+        expectedList.add(contact.withId(maxId));
+        expectedList.sort(compareById);
+
+
+
+        Allure.step("Validation result precondition", step -> {
+            Assertions.assertEquals(newRelated, expectedList);
+        });
+    }
+
+
+
 
 
 
